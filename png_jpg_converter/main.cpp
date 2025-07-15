@@ -6,20 +6,17 @@ using namespace std;
 namespace fs = filesystem;
 
 void replace_f_ext(fs::path& p_og, fs::path& p_new) {
-	cout << "Extension: " << p_og.extension() << endl;
 	if (p_og.extension() == ".jpg") {
-		cout << "jpg!" << endl;
 		p_new.replace_extension(".png");
 	}
 	else if (p_og.extension() == ".png") {
-		cout << "png!" << endl;
 		p_new.replace_extension(".jpg");
 	}
 }
 
 int main(int argc, char* argv[]) {
 	if (argc < 2) {
-		cerr << "Usage: img_convert <input>";
+		cerr << "Usage: img_convert <input> [-r]";
 		return 1;
 	}
 
@@ -27,8 +24,8 @@ int main(int argc, char* argv[]) {
 	if (argc > 2) {
 		for (int i = 2; i < argc; i += 1) {
 			if (string(argv[i]) == "-r") {
-				cout << "BAZINGA" << endl;
 				recursive = true;
+				break;
 			}
 		}
 	}
