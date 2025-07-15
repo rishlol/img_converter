@@ -1,7 +1,9 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <filesystem>
+#include <thread>
 #include <unordered_set>
+#include <vector>
 
 using namespace std;
 namespace fs = filesystem;
@@ -29,7 +31,11 @@ bool valid_format(string& f) {
 }
 
 // Change image encoding and extension
-inline void convert_img(fs::path& p, string &f) {
+inline void convert_img(fs::path p, string f) {
+	if (p.extension().string() == f) {
+		return;
+	}
+	cout << "Converting " << p.string() << " to " << f << endl;
 	cv::Mat img = cv::imread(p.string());
 	fs::path new_p = p;
 	new_p.replace_extension(f);
@@ -65,29 +71,34 @@ int main(int argc, char* argv[]) {
 		cerr << "Enter valid image format!";
 		return 1;
 	} else if (fs::is_regular_file(p)) {
-		cout << "Converting " << p.string() << " to " << format << endl;
 		convert_img(p, format);
 	} else if (fs::is_directory(p) && !recursive) {
+		vector<thread> threads;
 		fs::directory_iterator d(p);
 		fs::directory_iterator end;
 		while (d != end) {
-			if (fs::is_regular_file((*d).path())) {
-				cout << "Converting " << (*d).path().string() << " to " << format << endl;
-				fs::path p = (*d).path();
-				convert_img(p, format);
+			fs::path p = (*d).path();
+			if (fs::is_regular_file((*d).path())) {	
+				threads.emplace_back(thread(convert_img, p, format));
 			}
 			d++;
 		}
+		for (thread& t : threads) {
+			t.join();
+		}
 	} else if (fs::is_directory(p) && recursive) {
+		vector<thread> threads;
 		fs::recursive_directory_iterator d(p);
 		fs::recursive_directory_iterator end;
 		while (d != end) {
-			if (fs::is_regular_file((*d).path())) {
-				cout << "Converting " << (*d).path().string() << " to " << format << endl;
-				fs::path p = (*d).path();
-				convert_img(p, format);
+			fs::path p = (*d).path();
+			if (fs::is_regular_file(p)) {
+				threads.emplace_back(thread(convert_img, p, format));
 			}
 			d++;
+		}
+		for (thread &t : threads) {
+			t.join();
 		}
 	}
 
