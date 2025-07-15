@@ -72,8 +72,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\rish\Documents\dependencies\c++\opencv-4.12.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\rish\Documents\dependencies\c++\opencv-4.12.0\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\rish\Documents\dependencies\c++\opencv-4.12.0\debug\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\rish\Documents\dependencies\c++\opencv-4.12.0\debug\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -114,6 +114,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opencv_core4120d.lib;opencv_imgcodecs4120d.lib;opencv_highgui4120d.lib;opencv_imgproc4120d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
