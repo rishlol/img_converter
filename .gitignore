@@ -419,3 +419,6 @@ FodyWeavers.xsd
 
 # Any build directory
 build*/
+
+# macOS
+.DS_Store

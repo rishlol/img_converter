@@ -15,7 +15,7 @@ const unordered_set<string> VALID_EXTS = {
 	".tif", ".webp", ".jp2"
 };
 
-// Validate image format
+// Validate image output format
 bool valid_format(string& f) {
 	auto res = f.find('.');
 	if (res == string::npos) {
@@ -30,8 +30,14 @@ bool valid_format(string& f) {
 	return true;
 }
 
-// Change image encoding and extension
+// Ensure file is acceptable image
+inline bool valid_image_file(const fs::path &p) {
+    return fs::is_regular_file(p) && VALID_EXTS.find(p.extension().string()) != VALID_EXTS.end();
+}
+
+// Change image encoding and extension/format
 inline void convert_img(fs::path p, string f) {
+    // Skip conversion if not needed
 	if (p.extension().string() == f) {
 		return;
 	}
@@ -78,7 +84,7 @@ int main(int argc, char* argv[]) {
 		fs::directory_iterator end;
 		while (d != end) {
 			fs::path p = (*d).path();
-			if (fs::is_regular_file((*d).path())) {	
+			if (valid_image_file(p)) {
 				threads.emplace_back(thread(convert_img, p, format));
 			}
 			d++;
@@ -92,7 +98,7 @@ int main(int argc, char* argv[]) {
 		fs::recursive_directory_iterator end;
 		while (d != end) {
 			fs::path p = (*d).path();
-			if (fs::is_regular_file(p)) {
+			if (valid_image_file(p)) {
 				threads.emplace_back(thread(convert_img, p, format));
 			}
 			d++;
