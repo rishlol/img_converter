@@ -13,7 +13,7 @@ message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
 message(STATUS "OpenCV include dir: ${OpenCV_INCLUDE_DIRS}")
 
 # Add executable
-add_executable(img_converter main.cpp)
+add_executable(img_converter png_jpg_converter/main.cpp)
 
 # Include OpenCV headers
 target_include_directories(img_converter PRIVATE ${OpenCV_INCLUDE_DIRS})

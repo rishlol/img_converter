@@ -35,15 +35,27 @@ cmake --build build --config Release
 
 1. Install dependencies:
 
+Linux
 ```bash
 sudo apt install libopencv-dev cmake g++
 ```
 
+macOS
+```bash
+brew install opencv cmake g++
+```
+
 2. Build:
 
+Linux
 ```bash
 cmake -Bbuild -S .
 cmake --build build
+```
+
+macOS
+```bash
+cmake -Bbuild -S . -G Xcode
 ```
 
 3. Run:
