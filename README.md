@@ -99,4 +99,4 @@ Common formats supported by OpenCV (depending on build configuration):
 
 ## License
 
-idk
+MIT
