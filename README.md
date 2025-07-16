@@ -19,7 +19,14 @@ cd img_converter
 
 ### Windows (Visual Studio 2022)
 
-1. Open **x64 Native Tools Command Prompt for VS 2022**  
+1. Install dependencies:
+
+### Open Powershell as Administrator
+
+```bash
+choco install opencv
+```
+
 2. Run the following:
 
 ```bash

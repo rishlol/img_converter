@@ -420,5 +420,17 @@ FodyWeavers.xsd
 # Any build directory
 build*/
 
-# macOS
+# Visual Studio
+*.sln
+*.vcxproj*
+*.vcxproj.filters
+*.pdb
+*.ipch
+*.obj
+*.tlog
+*.log
+*.idb
+
+# Junk
 .DS_Store
+Thumbs.db
