@@ -47,13 +47,13 @@ brew install opencv cmake g++
 
 2. Build:
 
-Linux
+Linux/macOS (No Xcode)
 ```bash
 cmake -Bbuild -S .
 cmake --build build
 ```
 
-macOS
+macOS (Xcode)
 ```bash
 cmake -Bbuild -S . -G Xcode
 ```
