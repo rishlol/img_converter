@@ -21,20 +21,16 @@ cd img_converter
 
 1. Install dependencies:
 
-Open Powershell as Administrator
-
 ```bash
-choco install opencv
+vcpkg install opencv
 ```
 
 2. Run the following:
 
 ```bash
-cmake -DOpenCV_DIR=<OpenCV_path> -Bbuild -S . -G "Visual Studio 17 2022"
+cmake -DCMAKE_TOOLCHAIN_FILE="<vcpkg-root>/scripts/buildsystems/vcpkg.cmake" -Bbuild -S . -G "Visual Studio 17 2022"
 cmake --build build --config Release
 ```
-
-If installed through choco try: _-DOpenCV_DIR="C:/tools/opencv/build/x64/vc16/lib"_
 
 3. Or open the generated `build/img_converter.sln` in Visual Studio and build manually.
 
